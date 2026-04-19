@@ -53,7 +53,7 @@ export function Header() {
       className={`sticky top-0 z-50 transition-colors duration-300 ${
         solid
           ? "bg-paper/95 backdrop-blur-md border-b border-fog"
-          : "bg-transparent border-b border-transparent"
+          : "bg-deep/95 backdrop-blur-md border-b border-deep-rule"
       }`}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:h-28 lg:px-10">
