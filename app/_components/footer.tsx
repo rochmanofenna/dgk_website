@@ -19,8 +19,12 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
           {/* Company block */}
           <div className="flex flex-col gap-5">
-            <div className="rounded-md bg-paper p-4 w-fit">
-              <Logo width={140} />
+            {/* The logo jpeg has a white interior, so it needs a surface.
+             * Previously a hard white card — now a subtle paper pane
+             * with a hairline border so it reads as a framed plate,
+             * not a sticker. */}
+            <div className="w-fit border border-deep-rule bg-paper/95 px-3 py-2">
+              <Logo width={150} />
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-deep-muted">
               PT Dinamika Global Korpora is a privately held Indonesian
@@ -91,7 +95,7 @@ export function Footer() {
             © 2026 PT Dinamika Global Korpora · All rights reserved
           </p>
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-deep-muted">
-            <span className="caret-red">Jakarta · Tangerang · Surabaya</span>
+            <span className="caret-red">Jakarta · Tangerang</span>
           </p>
         </div>
       </div>
