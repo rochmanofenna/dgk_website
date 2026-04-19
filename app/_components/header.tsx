@@ -56,24 +56,29 @@ export function Header() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:h-20 lg:px-10">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:h-28 lg:px-10">
         <Link
           href="/"
           aria-label="DGK Holdings — home"
           className="flex items-center"
         >
           {/* On the transparent dark hero the jpeg still reads because its
-           * interior is white; a subtle drop shadow keeps it crisp. */}
+           * interior is white; a subtle drop shadow keeps it crisp. The
+           * logo sets the scale of the whole bar — sized to be recognisable
+           * rather than squinting-distance. */}
           <Logo
-            width={112}
+            width={240}
             priority
-            className={solid ? "" : "drop-shadow-[0_1px_0_rgba(0,0,0,0.15)]"}
+            className={`h-12 w-auto lg:h-[72px] ${
+              solid ? "" : "drop-shadow-[0_1px_0_rgba(0,0,0,0.15)]"
+            }`}
           />
         </Link>
 
-        {/* Desktop nav */}
+        {/* Desktop nav — sits tight against the logo so the bar reads as
+         * one unit. */}
         <nav className="hidden md:block">
-          <ul className="flex items-center gap-1">
+          <ul className="flex items-center gap-2">
             {NAV.map((item) => {
               const active =
                 item.href === "/"
@@ -184,7 +189,7 @@ function NavLink({
   children: React.ReactNode
 }) {
   const base =
-    "relative inline-flex items-center px-3 py-2 text-[13px] font-medium tracking-wide uppercase transition-colors"
+    "relative inline-flex items-center px-4 py-2 text-[12.5px] font-medium tracking-[0.16em] uppercase transition-colors"
   const colour =
     tone === "light"
       ? active
