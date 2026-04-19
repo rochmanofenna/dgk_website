@@ -18,6 +18,11 @@ const NAV: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ]
 
+// TODO(dylan): swap for portal.dinamikaglobalkorpora.com once the
+// custom domain is issued. For the MVP the ERP lives on the vercel
+// preview URL — staff bookmark the portal button, not the URL.
+const PORTAL_URL = "https://dgk-tau.vercel.app/"
+
 /**
  * Site header — sticky navigation with a small scroll-aware reveal. On
  * the homepage it starts transparent so the dark hero bleeds to the
@@ -76,8 +81,10 @@ export function Header() {
         </Link>
 
         {/* Desktop nav — right-aligned with container-style padding applied
-         * here so the logo can bleed all the way left. */}
-        <nav className="hidden items-center pr-6 md:flex lg:pr-10">
+         * here so the logo can bleed all the way left. The portal button
+         * sits on its own, separated by a hairline rule, because it links
+         * out to a different application (the ERP). */}
+        <nav className="hidden items-center pr-4 md:flex lg:pr-6">
           <ul className="flex items-center gap-2">
             {NAV.map((item) => {
               const active =
@@ -97,6 +104,33 @@ export function Header() {
               )
             })}
           </ul>
+          <span
+            aria-hidden
+            className={`mx-3 block h-5 w-px ${
+              tone === "light" ? "bg-fog" : "bg-white/20"
+            }`}
+          />
+          <a
+            href={PORTAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 bg-brand-red px-4 py-2.5 text-[12px] font-medium uppercase tracking-[0.16em] text-white transition-colors hover:bg-brand-red-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+          >
+            Client portal
+            <svg
+              aria-hidden
+              viewBox="0 0 24 24"
+              className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            >
+              <path
+                d="M7 17 L17 7 M9 7 H17 V15"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="square"
+              />
+            </svg>
+          </a>
         </nav>
 
         {/* Mobile trigger — right-aligned inside the bar, matching the
@@ -172,6 +206,23 @@ export function Header() {
               )
             })}
           </ul>
+          <a
+            href={PORTAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 flex items-center justify-between gap-2 border-t border-fog bg-brand-red px-4 py-3 text-[13px] font-medium uppercase tracking-[0.14em] text-white"
+          >
+            <span>Client portal</span>
+            <svg aria-hidden viewBox="0 0 24 24" className="h-3.5 w-3.5">
+              <path
+                d="M7 17 L17 7 M9 7 H17 V15"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="square"
+              />
+            </svg>
+          </a>
         </nav>
       </div>
     </header>
