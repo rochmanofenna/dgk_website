@@ -50,7 +50,7 @@ function Hero() {
           </div>
 
           <h1
-            className="rise mt-8 max-w-2xl text-balance font-sans text-[42px] font-semibold leading-[1.04] tracking-tight text-white sm:text-[52px] lg:text-[64px]"
+            className="rise mt-8 max-w-[22ch] text-balance font-sans text-[44px] font-semibold leading-[1.02] tracking-[-0.025em] text-white sm:text-[60px] lg:text-[78px]"
             style={{ animationDelay: "260ms" }}
           >
             The archipelago moves on brokered freight.{" "}
@@ -119,11 +119,15 @@ function Hero() {
 }
 
 function StatsStrip() {
+  // TODO(dylan): confirm each figure before launch. Current values are
+  // defensible approximations — err on the side of under-claiming. The
+  // old draft claimed "420+ carriers" and "38 provinces" which neither
+  // the rate cards nor Transcoll operations back up.
   const stats = [
-    { value: "2015", label: "Founded" },
-    { value: "420+", label: "Vetted carriers" },
-    { value: "38", label: "Provinces reached" },
-    { value: "< 24 h", label: "Quote response" },
+    { value: "2015", label: "Founded", note: "Year the holding company was registered" },
+    { value: "10+", label: "Carrier partners", note: "Vetted regulars inside the Transcoll + extended pool" },
+    { value: "Java · Sumatra", label: "Coverage", note: "Corridors served today; expansion planned" },
+    { value: "< 24 h", label: "Quote response", note: "Median turnaround on inbound RFQs" },
   ]
   return (
     <section className="border-y border-fog bg-paper">
@@ -132,16 +136,20 @@ function StatsStrip() {
           {stats.map((s, i) => (
             <div
               key={s.label}
-              className={`flex flex-col gap-2 px-4 py-10 md:px-8 ${
+              className={`flex flex-col gap-3 px-4 py-12 md:px-8 md:py-14 ${
                 i % 2 === 1 ? "border-l border-fog md:border-l-0" : ""
               }`}
             >
-              <dt className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-muted">
+              <dt className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-ink-muted">
+                <span className="mr-2 inline-block h-[6px] w-[6px] translate-y-[-1px] bg-brand-red align-middle" />
                 {s.label}
               </dt>
-              <dd className="font-sans text-4xl font-semibold tracking-tight text-ink [font-variant-numeric:tabular-nums] md:text-5xl">
+              <dd className="font-sans text-[30px] font-semibold leading-[1.05] tracking-tight text-ink [font-variant-numeric:tabular-nums] md:text-[36px] lg:text-[44px]">
                 {s.value}
               </dd>
+              <p className="text-[12.5px] leading-snug text-ink-muted">
+                {s.note}
+              </p>
             </div>
           ))}
         </dl>
@@ -156,24 +164,28 @@ function WhatWeDo() {
     title: string
     body: string
     href: string
+    glyph: React.ReactNode
   }> = [
     {
       no: "01",
       title: "Logistics & Distribution",
       body: "Full-truckload and less-than-truckload brokerage across Java and Sumatra, including cold-chain consignments that can't afford to miss a window.",
       href: "/services#logistics",
+      glyph: <TruckGlyph />,
     },
     {
       no: "02",
       title: "Courier Services",
       body: "City and intercity courier dispatch for documents, spares, and time-sensitive parcels, with same-day cover in the Jabodetabek conurbation.",
       href: "/services#courier",
+      glyph: <ParcelGlyph />,
     },
     {
       no: "03",
       title: "Investment & Holdings",
       body: "As a holding company, we co-invest in complementary logistics infrastructure — warehousing, cold storage, last-mile fleets — to strengthen the carrier network.",
       href: "/services#holdings",
+      glyph: <LedgerGlyph />,
     },
   ]
   return (
@@ -181,7 +193,7 @@ function WhatWeDo() {
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="max-w-2xl">
           <SectionEyebrow>What we do</SectionEyebrow>
-          <h2 className="mt-4 text-balance font-sans text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl lg:text-[44px]">
+          <h2 className="mt-4 text-balance font-sans text-[34px] font-semibold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[44px] lg:text-[56px]">
             Three disciplines, one operational philosophy: move the load,
             keep the ledger honest.
           </h2>
@@ -208,10 +220,15 @@ function WhatWeDo() {
             className="group relative flex flex-col justify-between overflow-hidden border border-fog bg-paper p-7 transition-colors hover:border-ink"
           >
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-ink-faint">
-                {it.no} / DIVISION
-              </p>
-              <h3 className="mt-6 font-sans text-[22px] font-semibold leading-snug text-ink">
+              <div className="flex items-start justify-between gap-4">
+                <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-ink-faint">
+                  {it.no} / DIVISION
+                </p>
+                <span className="text-ink-soft transition-colors group-hover:text-brand-red">
+                  {it.glyph}
+                </span>
+              </div>
+              <h3 className="mt-8 font-sans text-[22px] font-semibold leading-snug text-ink">
                 {it.title}
               </h3>
               <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">
@@ -261,7 +278,7 @@ function WhyDgk() {
       <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionEyebrow>Why DGK</SectionEyebrow>
-          <h2 className="mt-4 text-balance font-sans text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl lg:text-[44px]">
+          <h2 className="mt-4 text-balance font-sans text-[34px] font-semibold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[44px] lg:text-[56px]">
             A broker model built for an archipelago that doesn't forgive
             single points of failure.
           </h2>
@@ -298,27 +315,106 @@ function WhyDgk() {
   )
 }
 
+/**
+ * Service-card glyphs — deliberately line-weight, schematic, brand-adjacent.
+ * Not mass-market Material icons; each one inherits stroke colour so the
+ * hover state can turn them red alongside the arrow.
+ */
+function TruckGlyph() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 48 32"
+      className="h-9 w-auto"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.3"
+      strokeLinecap="square"
+    >
+      <rect x="2" y="6" width="26" height="17" />
+      <path d="M28 12 H38 L44 18 V23 H28 Z" />
+      <circle cx="12" cy="25" r="3.2" />
+      <circle cx="36" cy="25" r="3.2" />
+      <path d="M32 18 H40" />
+      <path d="M8 10 H22 M8 14 H18" strokeOpacity="0.45" />
+    </svg>
+  )
+}
+
+function ParcelGlyph() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 40 40"
+      className="h-9 w-auto"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.3"
+      strokeLinecap="square"
+    >
+      <path d="M4 12 L20 4 L36 12 L36 30 L20 38 L4 30 Z" />
+      <path d="M4 12 L20 20 L36 12" />
+      <path d="M20 20 V38" />
+      <path d="M12 8 L28 16" strokeDasharray="1.5 2" strokeOpacity="0.55" />
+    </svg>
+  )
+}
+
+function LedgerGlyph() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 40 36"
+      className="h-9 w-auto"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.3"
+      strokeLinecap="square"
+    >
+      <rect x="3" y="4" width="34" height="28" />
+      <path d="M3 10 H37" />
+      <path d="M9 18 V26 M16 14 V26 M23 20 V26 M30 12 V26" />
+      <circle cx="9" cy="15" r="1.2" fill="currentColor" />
+      <circle cx="16" cy="11" r="1.2" fill="currentColor" />
+      <circle cx="23" cy="17" r="1.2" fill="currentColor" />
+      <circle cx="30" cy="9" r="1.2" fill="currentColor" />
+      <path d="M9 15 L16 11 L23 17 L30 9" strokeOpacity="0.55" />
+    </svg>
+  )
+}
+
 function CtaBand() {
   return (
-    <section className="relative isolate overflow-hidden bg-deep text-deep-text">
-      <div aria-hidden className="absolute inset-0 topo-grid-fine opacity-40" />
+    <section className="relative isolate overflow-hidden bg-mist text-ink">
+      {/* Paper grid + a red edge rule keep this tied to the cartographic
+       * grammar without darkening another band. Hero and footer already
+       * own the dark tone; the middle of the page stays legible light. */}
+      <div aria-hidden className="absolute inset-0 paper-grid opacity-60" />
       <div aria-hidden className="absolute inset-x-0 top-0 h-[2px] bg-brand-red" />
+      <div
+        aria-hidden
+        className="absolute -right-24 top-[-40%] h-[140%] w-[420px] -skew-x-12 bg-brand-red/[0.04]"
+      />
       <div className="relative mx-auto max-w-7xl px-6 py-20 lg:flex lg:items-center lg:justify-between lg:gap-14 lg:px-10 lg:py-24">
         <div className="max-w-2xl">
-          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-deep-muted">
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-ink-muted">
             <span className="mr-3 inline-block h-[8px] w-[8px] translate-y-[1px] bg-brand-red" />
             Start a route
           </p>
-          <h2 className="mt-5 text-balance font-sans text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-[42px]">
+          <h2 className="mt-5 text-balance font-sans text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl lg:text-[48px]">
             Tell us the origin, the destination, and the window. We'll
             quote it within a business day.
           </h2>
+          <p className="mt-5 max-w-xl text-[15.5px] leading-relaxed text-ink-muted">
+            Operations answer inside one business day — a carrier, a window,
+            and a single unit rate. No queue robot.
+          </p>
         </div>
         <div className="mt-10 flex flex-wrap gap-3 lg:mt-0">
           <CtaButton href="/contact" variant="primary">
             Request a quote
           </CtaButton>
-          <CtaButton href="/about" variant="ghost-dark">
+          <CtaButton href="/about" variant="secondary">
             About DGK
           </CtaButton>
         </div>
