@@ -27,7 +27,9 @@ const NAV: NavItem[] = [
 export function Header() {
   const pathname = usePathname()
   const isHome = pathname === "/"
-  const [scrolled, setScrolled] = useState(false)
+  // Non-home routes render with the light surface immediately — no
+  // SSR/CSR flash of the dark hero styling on /about, /services, /contact.
+  const [scrolled, setScrolled] = useState(!isHome)
   const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
@@ -56,28 +58,26 @@ export function Header() {
           : "bg-deep/95 backdrop-blur-md border-b border-deep-rule"
       }`}
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:h-28 lg:px-10">
+      <div className="flex h-16 items-stretch justify-between lg:h-20">
+        {/* Logo plate — flush to the viewport edge, fills the full height
+         * of the bar. The jpeg's white interior becomes a natural left
+         * block; the nav lives in the tonal band to the right. No
+         * padding, no border, no shadow — two-tone by construction. */}
         <Link
           href="/"
           aria-label="DGK Holdings — home"
-          className="flex items-center"
+          className="flex items-stretch"
         >
-          {/* On the transparent dark hero the jpeg still reads because its
-           * interior is white; a subtle drop shadow keeps it crisp. The
-           * logo sets the scale of the whole bar — sized to be recognisable
-           * rather than squinting-distance. */}
           <Logo
-            width={240}
+            width={420}
             priority
-            className={`h-12 w-auto lg:h-[72px] ${
-              solid ? "" : "drop-shadow-[0_1px_0_rgba(0,0,0,0.15)]"
-            }`}
+            className="h-full w-auto"
           />
         </Link>
 
-        {/* Desktop nav — sits tight against the logo so the bar reads as
-         * one unit. */}
-        <nav className="hidden md:block">
+        {/* Desktop nav — right-aligned with container-style padding applied
+         * here so the logo can bleed all the way left. */}
+        <nav className="hidden items-center pr-6 md:flex lg:pr-10">
           <ul className="flex items-center gap-2">
             {NAV.map((item) => {
               const active =
@@ -99,13 +99,14 @@ export function Header() {
           </ul>
         </nav>
 
-        {/* Mobile trigger */}
+        {/* Mobile trigger — right-aligned inside the bar, matching the
+         * nav's right padding on desktop. */}
         <button
           type="button"
           aria-label="Toggle navigation"
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((v) => !v)}
-          className={`group relative flex h-10 w-10 items-center justify-center md:hidden ${
+          className={`group relative mr-4 flex w-10 items-center justify-center self-center md:hidden ${
             solid ? "text-ink" : "text-white"
           }`}
         >
