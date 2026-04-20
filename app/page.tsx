@@ -251,7 +251,7 @@ function WhatWeDo() {
           <Link
             key={it.no}
             href={it.href}
-            className="group relative flex flex-col justify-between overflow-hidden border border-fog bg-paper p-7 transition-colors hover:border-ink"
+            className="reveal-on-scroll group relative flex flex-col justify-between overflow-hidden border border-fog bg-paper p-7 transition-colors hover:border-ink"
           >
             <div>
               <div className="flex items-start justify-between gap-4">
@@ -328,7 +328,7 @@ function WhyDgk() {
           {points.map((p, idx) => (
             <li
               key={p.label}
-              className="grid gap-6 border-t border-fog py-10 last:border-b sm:grid-cols-[auto_1fr]"
+              className="reveal-on-scroll grid gap-6 border-t border-fog py-10 last:border-b sm:grid-cols-[auto_1fr]"
             >
               <span className="font-mono text-[12px] uppercase tracking-[0.24em] text-brand-red sm:w-28">
                 {String(idx + 1).padStart(2, "0")}

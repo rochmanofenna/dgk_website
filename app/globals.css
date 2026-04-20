@@ -128,10 +128,37 @@
   animation: pulse-node 2.4s ease-in-out infinite;
 }
 
+/* Scroll-linked reveal. animation-timeline: view() ties each element's
+ * fade/rise to its own position in the viewport — sections wake up as
+ * they scroll on, without JS. @supports wraps the feature so Firefox
+ * and older Safari (pre-26) show the element un-animated rather than
+ * stuck invisible. */
+@keyframes reveal-on-scroll {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .reveal-on-scroll {
+    animation: reveal-on-scroll linear both;
+    animation-timeline: view();
+    /* Start shortly after the element appears at the bottom of the
+     * viewport; finish before it hits the middle — snappy, not lazy. */
+    animation-range: entry 10% entry 80%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rise,
   .route-line,
-  .route-node-pulse {
+  .route-node-pulse,
+  .reveal-on-scroll {
     animation: none;
   }
   .route-line {

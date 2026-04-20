@@ -137,7 +137,10 @@ function Timeline() {
         </div>
         <ol className="relative border-l border-fog pl-8">
           {entries.map((e) => (
-            <li key={e.year} className="relative pb-12 last:pb-0">
+            <li
+              key={e.year}
+              className="reveal-on-scroll relative pb-12 last:pb-0"
+            >
               <span
                 aria-hidden
                 className="absolute -left-[37px] top-1 flex h-4 w-4 items-center justify-center"
@@ -250,7 +253,7 @@ function BrokerCard({
 }) {
   return (
     <div
-      className={`relative border p-8 ${
+      className={`reveal-on-scroll relative border p-8 ${
         highlight
           ? "border-brand-red/50 bg-brand-red/[0.06]"
           : "border-deep-rule bg-deep-2/40"
@@ -312,7 +315,7 @@ function Principles() {
           {items.map((it) => (
             <div
               key={it.n}
-              className="flex flex-col border-l-2 border-brand-red/80 bg-mist/70 p-6"
+              className="reveal-on-scroll flex flex-col border-l-2 border-brand-red/80 bg-mist/70 p-6"
             >
               <dt className="flex items-baseline gap-3">
                 <span className="font-mono text-[12px] uppercase tracking-[0.24em] text-brand-red">
