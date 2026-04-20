@@ -123,28 +123,62 @@ function StatsStrip() {
   // defensible approximations — err on the side of under-claiming. The
   // old draft claimed "420+ carriers" and "38 provinces" which neither
   // the rate cards nor Transcoll operations back up.
+  //
+  // TODO(dylan): if you have a stronger lead stat — e.g. "180+
+  // deliveries/month" or "40 T moved/month" — swap it into the first
+  // slot. A concrete monthly-volume number anchors the whole strip far
+  // better than "10+ carrier partners" does.
   const stats = [
-    { value: "2015", label: "Founded", note: "Year the holding company was registered" },
-    { value: "10+", label: "Carrier partners", note: "Vetted regulars inside the Transcoll + extended pool" },
-    { value: "Java · Sumatra", label: "Coverage", note: "Corridors served today; expansion planned" },
-    { value: "< 24 h", label: "Quote response", note: "Median turnaround on inbound RFQs" },
+    {
+      value: "10+",
+      label: "Carrier partners",
+      note: "Vetted regulars inside the Transcoll + extended pool",
+    },
+    {
+      value: "Java · Sumatra",
+      label: "Coverage",
+      note: "Corridors served today; expansion planned",
+    },
+    {
+      value: "< 24 h",
+      label: "Quote response",
+      note: "Median turnaround on inbound RFQs",
+    },
   ]
   return (
     <section className="border-y border-fog bg-paper">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <dl className="grid grid-cols-2 divide-y divide-fog md:grid-cols-4 md:divide-x md:divide-y-0">
-          {stats.map((s, i) => (
+        {/* Chart-header eyebrow — relocates "Founded 2015" out of the
+         * stat row and frames the three figures like a data sheet.
+         * Continues the "Chart 01" / "Chart 02" numbering that started
+         * on the hero. */}
+        <div className="flex items-center justify-between gap-4 border-b border-fog py-5 font-mono text-[10.5px] uppercase tracking-[0.24em] text-ink-muted">
+          <span className="flex items-center gap-2">
+            <span
+              aria-hidden
+              className="inline-block h-[6px] w-[6px] bg-brand-red"
+            />
+            Est. 2015 · DGK Holdings Corporation
+          </span>
+          <span className="hidden sm:inline">Chart 02 · Key indicators</span>
+        </div>
+        <dl className="grid grid-cols-1 divide-y divide-fog md:grid-cols-3 md:divide-x md:divide-y-0">
+          {stats.map((s) => (
             <div
               key={s.label}
-              className={`flex flex-col gap-3 px-4 py-12 md:px-8 md:py-14 ${
-                i % 2 === 1 ? "border-l border-fog md:border-l-0" : ""
-              }`}
+              className="flex flex-col gap-5 px-4 py-12 md:px-8 md:py-16"
             >
               <dt className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-ink-muted">
-                <span className="mr-2 inline-block h-[6px] w-[6px] translate-y-[-1px] bg-brand-red align-middle" />
+                <span
+                  aria-hidden
+                  className="mr-2 inline-block h-[6px] w-[6px] translate-y-[-1px] bg-brand-red align-middle"
+                />
                 {s.label}
               </dt>
-              <dd className="font-sans text-[30px] font-semibold leading-[1.05] tracking-tight text-ink [font-variant-numeric:tabular-nums] md:text-[36px] lg:text-[44px]">
+              {/* Display numerals — target 64–80 px on desktop. Non-
+               * numeric values ("Java · Sumatra") wrap gracefully via
+               * text-balance; pure numerals stay on one line. */}
+              <dd className="text-balance font-sans text-[48px] font-semibold leading-[0.95] tracking-[-0.035em] text-ink [font-variant-numeric:tabular-nums] sm:text-[56px] md:text-[68px] lg:text-[80px]">
                 {s.value}
               </dd>
               <p className="text-[12.5px] leading-snug text-ink-muted">
