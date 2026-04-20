@@ -70,11 +70,11 @@ function Hero() {
             className="rise mt-10 flex flex-wrap items-center gap-3"
             style={{ animationDelay: "560ms" }}
           >
-            <CtaButton href="/services" variant="primary">
-              Explore services
+            <CtaButton href="/contact" variant="primary">
+              Start a corridor
             </CtaButton>
-            <CtaButton href="/contact" variant="ghost-dark">
-              Contact us
+            <CtaButton href="/services" variant="ghost-dark">
+              Explore services
             </CtaButton>
           </div>
 

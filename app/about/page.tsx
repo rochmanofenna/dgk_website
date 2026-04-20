@@ -355,11 +355,11 @@ function CtaBand() {
           </h2>
         </div>
         <div className="flex flex-wrap gap-3">
-          <CtaButton href="/services" variant="primary">
-            See services
+          <CtaButton href="/contact" variant="primary">
+            Ask about a route
           </CtaButton>
-          <CtaButton href="/contact" variant="secondary">
-            Contact us
+          <CtaButton href="/services" variant="secondary">
+            See services
           </CtaButton>
         </div>
       </div>
