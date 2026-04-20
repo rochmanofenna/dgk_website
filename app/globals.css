@@ -73,6 +73,14 @@
     font-feature-settings: "ss01", "cv11";
   }
 
+  /* H1s in this site are always display-sized (≥40 px, typically
+   * 64–78 px). At those sizes the -0.02em base tracking reads loose;
+   * dial it tighter so large headlines feel calibrated. Individual
+   * pages can still override via Tailwind's `tracking-*` classes. */
+  h1 {
+    letter-spacing: -0.03em;
+  }
+
   ::selection {
     background: var(--color-brand-red);
     color: #ffffff;
@@ -192,9 +200,11 @@
   background-size: 32px 32px;
 }
 
-/* Corner-crop tick marks — places a small right-angle indicator at an
- * element's corners. Used on hero headline blocks as a cartographer's
- * registration mark. */
+/* Corner-crop tick marks — small right-angle indicator at each corner.
+ * Reserved for diagram and chart frames (archipelago map, service row
+ * schematics, contact office outline) so the ticks keep a single
+ * meaning: "this is a chart, not decoration". Don't reach for it on
+ * generic cards. */
 .tick-frame {
   position: relative;
 }

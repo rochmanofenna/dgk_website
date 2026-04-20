@@ -13,6 +13,13 @@ import { Section, SectionEyebrow } from "./_components/section"
  */
 
 export default function HomePage() {
+  // TODO(phase-2): a "Dispatch log" section was proposed between
+  // WhyDgk and CtaBand — last N hours of anonymised deliveries with
+  // corridor, load type, and truck class. Deferred until the ERP
+  // publishes a read-only feed; fabricated operational figures read
+  // as an obvious bluff to anyone inside Indonesian logistics, and
+  // the marketing site has to stay defensible against a freight
+  // operator's glance.
   return (
     <>
       <Hero />
@@ -108,6 +115,11 @@ function Hero() {
           <div className="tick-frame relative rounded-none border border-deep-rule bg-deep-2/60 p-4 text-deep-text sm:p-6">
             <div className="mb-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.24em] text-deep-muted">
               <span>Chart 01 · Active Corridors</span>
+              {/* TODO(dylan): "● Live" is a static decoration today.
+               * Wire it to a real dispatch heartbeat (e.g. the ERP
+               * publishing N-deliveries-in-transit) or strip the dot
+               * — fake "live" is worse than no "live" for a logistics
+               * company that clients and regulators read carefully. */}
               <span className="text-brand-red">● Live</span>
             </div>
             <ArchipelagoMap className="h-auto w-full" />

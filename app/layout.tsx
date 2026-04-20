@@ -65,6 +65,11 @@ export default function RootLayout({
          * the same brand. */}
         <div aria-hidden className="h-[3px] w-full bg-brand-red" />
         <Header />
+        {/* TODO(phase-2): wrap {children} in React's <ViewTransition>
+         * once it lands in stable React (canary-only in 19.2.4). With
+         * the Next 16 `experimental.viewTransition` flag enabled and
+         * React's ViewTransition import, route changes would crossfade
+         * via the browser's native View Transitions API — no library. */}
         <main id="main">{children}</main>
         <Footer />
       </body>
